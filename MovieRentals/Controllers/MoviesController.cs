@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MovieRentals.Models;
+using MovieRentals.Models.ViewModels;
 
 namespace MovieRentals.Controllers
 {
@@ -13,7 +14,17 @@ namespace MovieRentals.Controllers
 		public ActionResult Random()
 		{
 			var movie = new Movie() { Name = "Lion King live action remake" };
-			return View(movie);
+			var customers = new List<Customer>
+			{
+				new Customer { Name = "Stefan Löven" },
+				new Customer { Name = "Donald Trump" }
+			};
+			var viewModel = new RandomMovieViewModel
+			{
+				Movie = movie,
+				Customers = customers
+			};
+			return View(viewModel);
 		}
 
 		public ActionResult Edit(int id)
