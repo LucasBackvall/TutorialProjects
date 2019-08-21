@@ -27,18 +27,21 @@ namespace MovieRentals.Controllers
 			return View(viewModel);
 		}
 
-		public ActionResult Edit(int id)
-		{
-			return Content("id=" + id);
-		}
-		
 		public ActionResult Index(int? pageIndex, string sortBy)
 		{
+			// Page index and sort by is currently unused
 			if (!pageIndex.HasValue)
 				pageIndex = 1;
 			if (String.IsNullOrWhiteSpace(sortBy))
 				sortBy = "Name";
-			return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
+			var movies = new List<Movie>
+			{
+				new Movie { Id = 0, Name = "The Lion King: Live action remake" },
+				new Movie { Id = 1, Name = "Terminator" },
+				new Movie { Id = 2, Name = "Terminator 3" }
+			};
+			var viewModel = new MovieIndexViewModel { Movies = movies };
+			return View(viewModel);
 		}
 
 		// Special case routing.
