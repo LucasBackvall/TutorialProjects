@@ -13,15 +13,9 @@ namespace MovieRentals
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-			// Special route for MoviesByReleaseDate.
-			// Constrained so a year must be 4 digits and month must be 2 digits.
-			//  2200 /99 is still valid.
-			routes.MapRoute(
-				name: "MoviesByReleaseDate",
-				url: "movies/released/{year}/{month}",
-				defaults: new { controller = "Movies", action = "ByReleaseDate" },
-				new { year = @"\d{4}", month = @"\d{2}" }
-			);
+			// route via attributes for special routes.
+			routes.MapMvcAttributeRoutes();
+			
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
