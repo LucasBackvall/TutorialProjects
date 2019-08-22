@@ -10,6 +10,21 @@ namespace MovieRentals.Controllers
 {
 	public class MoviesController : Controller
 	{
+		
+		public ActionResult Index(int? pageIndex, string sortBy)
+		{
+			// Page index and sort by is currently unused
+			if (!pageIndex.HasValue)
+				pageIndex = 1;
+			if (String.IsNullOrWhiteSpace(sortBy))
+				sortBy = "Name";
+
+			var viewModel = new MovieIndexViewModel { Movies = MovieDatabase.Movies() };
+			return View(viewModel);
+		}
+		
+		// Everything below this is testing that's not supposed to be used.
+
 		// Example of routing with default routing
 		public ActionResult Random()
 		{
@@ -24,23 +39,6 @@ namespace MovieRentals.Controllers
 				Movie = movie,
 				Customers = customers
 			};
-			return View(viewModel);
-		}
-
-		public ActionResult Index(int? pageIndex, string sortBy)
-		{
-			// Page index and sort by is currently unused
-			if (!pageIndex.HasValue)
-				pageIndex = 1;
-			if (String.IsNullOrWhiteSpace(sortBy))
-				sortBy = "Name";
-			var movies = new List<Movie>
-			{
-				new Movie { Id = 0, Name = "The Lion King: Live action remake" },
-				new Movie { Id = 1, Name = "Terminator" },
-				new Movie { Id = 2, Name = "Terminator 3" }
-			};
-			var viewModel = new MovieIndexViewModel { Movies = movies };
 			return View(viewModel);
 		}
 

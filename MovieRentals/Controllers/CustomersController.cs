@@ -10,27 +10,16 @@ namespace MovieRentals.Controllers
 {
 	public class CustomersController : Controller
 	{
-		private List<Customer> CustomerList()
-		{
-			var customers = new List<Customer> 
-				{
-					new Customer { Id = 0, Name = "Stefan Löven" },
-					new Customer { Id = 1, Name = "Donald Trump" }
-				};
-			
-			return customers;
-		}
-		
 
 		public ActionResult Index()
 		{
-			var viewModel = new CustomerIndexViewModel { Customers = CustomerList() };
+			var viewModel = new CustomerIndexViewModel { Customers = CustomerDatabase.Customers() };
 			return View(viewModel);
 		}
 
 		public ActionResult Details(int id)
 		{
-			var viewModel = new CustomerDetailsViewModel { Customer = CustomerList()[id] };
+			var viewModel = new CustomerDetailsViewModel { Customer = CustomerDatabase.Customers()[id] };
 			return View(viewModel);
 		}
 	}
