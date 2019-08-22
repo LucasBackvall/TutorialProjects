@@ -14,7 +14,7 @@ else
     <ul>
         @foreach (var customer in Model.Customers)
         {
-            <li><a href="Customers/Details/@customer.Id">@customer.Name</a></li>
+        <li>@Html.ActionLink(customer.Name, String.Format("Details/{0}", customer.Id)) </li>
         }
     </ul>
 }
